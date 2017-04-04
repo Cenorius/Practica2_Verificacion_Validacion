@@ -72,7 +72,7 @@ class data_base_TestDB(TestCase):
 
         
 
-# -test_update------------------------------------------------------------------------------------------------
+# -test_update_one------------------------------------------------------------------------------------------------
     def test_update_one_existing_in_db(self):
         element={"name":"texto",'words': [{'palabra1': 1}, {'palabra2': 2}]}
         id=self.data_base.insert(element)
@@ -125,6 +125,12 @@ class data_base_TestDB(TestCase):
         element = {"name":"texto",'words': [{'palabra1': 2}, {'palabra2': 2}]}
 
         self.assertFalse(self.data_base._exist(element))
+
+    def test_exist_existing_element_in_db(self):
+        element = {"name":"texto",'words': [{'palabra1': 2}, {'palabra2': 2}]}
+        self.data_base.insert(element)
+
+        self.assertTrue(self.data_base._exist(element))
 
     def test_alive(self):
         self.assertTrue(self.data_base._alive())
