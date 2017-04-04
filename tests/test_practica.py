@@ -59,11 +59,12 @@ class data_base_TestDB(TestCase):
 # -test_delete------------------------------------------------------------------------------------------------
     def test__delete_one(self):
         self.data_base.delete({'_id': 1})
-        self.assertTrue(self.data_base._exist({'id':1}))
+        self.assertFalse(self.data_base._exist({'id':1}))
 
 # -test_update------------------------------------------------------------------------------------------------
-
-
+    def test__update_one(self):
+        element=self.data_base.update({'_id':1},{'$set':{'a':"2",'b':"1",'c':"3"}})
+        self.assertFalse(self.data_base._exist(element))
 
 # -test__exist------------------------------------------------------------------------------------------------
 
