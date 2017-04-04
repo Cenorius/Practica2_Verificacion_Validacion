@@ -31,8 +31,7 @@ class data_base(object):
 
 
     def delete(self,id):
-
-        self.db.words.remove({'_id': id})
+        return self.db.words.delete_one({'_id': id})
     
     def update(self, dictionary,id):
         self.db.words.update_one({"_id" : id},{'$set':dictionary},False)

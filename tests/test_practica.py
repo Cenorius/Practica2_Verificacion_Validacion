@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from unittest import TestCase
 import unittest
 import pymongo
@@ -5,8 +6,6 @@ import mongomock
 import mock
 from practica.data_base import data_base
 
-
-# enconding: utf-8
 
 class data_base_TestDB(TestCase):
     def setUp(self):
@@ -57,21 +56,31 @@ class data_base_TestDB(TestCase):
             self.data_base.insert(element)
 
 # -test_delete------------------------------------------------------------------------------------------------
-    def test__delete_one(self):
-        self.data_base.delete({'_id': 1})
-        self.assertFalse(self.data_base._exist({'id':1}))
+    def test_delete_one_element_not_existing_in_db(self):
+        result=self.data_base.delete("1").deleted_count
+        expected=0
+
+        self.assertEqual(result,expected)
+
+    def test_delete_one_element_existing_in_db(self):
+        id=self.data_base.insert({"name":"texto",'words': [{'palabra1': 1}, {'palabra2': 2}]})
+        
+        result=self.data_base.delete(id).deleted_count
+        expected=1
+
+        self.assertEqual(result,expected)
 
 # -test_update------------------------------------------------------------------------------------------------
-    def test__update_one(self):
+    def test_update_one(self):
         element=self.data_base.update({'_id':1},{'$set':{'a':"2",'b':"1",'c':"3"}})
         self.assertFalse(self.data_base._exist(element))
 
 # -test__exist------------------------------------------------------------------------------------------------
 
-    def test__exist_not_existing_element_in_db(self):
+    def test_exist_not_existing_element_in_db(self):
         element = {"name":"texto",'words': [{'palabra1': 2}, {'palabra2': 2}]}
 
         self.assertFalse(self.data_base._exist(element))
 
-    def test__alive(self):
+    def test_alive(self):
         self.assertTrue(self.data_base._alive())
