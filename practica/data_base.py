@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import pymongo
 
+
 #'mongodb://localhost:27017/'
 class data_base(object):
 
@@ -9,6 +10,7 @@ class data_base(object):
 
     def __init__(self):
         self.db=pymongo.MongoClient(self.URL_MONGO)[self.DATA_BASE_NAME]
+
 
     def insert(self,dictionary):
         self.db.words.insert_one(dictionary)
@@ -33,3 +35,9 @@ class data_base(object):
     def _exist(self, element):
         result = self.db.words.find_one(element)
         return element is not None
+
+    def _alive(self):
+        """Siempre tiene que estar alive por lo tanto siempre se devuelve True
+        """
+
+        return True
