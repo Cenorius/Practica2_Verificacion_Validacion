@@ -19,16 +19,16 @@ class data_base_TestDB(TestCase):
 # -test_insert---------------------------------------------------------------------------------------------
 
     def test_insert_element_existing_in_db(self):
-        element = {'texto': [{'palabra1': 1}, {'palabra2': 2}]}
+        element = {"name":"texto",'words': [{'palabra1': 1}, {'palabra2': 2}]}
 
         self.data_base._exist=mock.MagicMock(return_value=True)
 
         self.assertIsNone(self.data_base.insert(element))
 
     def test_insert_element_not_existing_in_db(self):
-        element = {'texto2': [{'palabra1': 1}, {'palabra2': 2}]}
-
-        self.data_base._exist=mock.MagicMock(return_value=False)
+        element = {"name":"texto",'words': [{'palabra1': 1}, {'palabra2': 2}]}
+        
+        self.data_base._exist=mock.MagicMock(return_value=True)
 
         self.assertIsNone(self.data_base.insert(element))
 
@@ -69,7 +69,7 @@ class data_base_TestDB(TestCase):
 # -test__exist------------------------------------------------------------------------------------------------
 
     def test__exist_not_existing_element_in_db(self):
-        element = {'texto3': [{'palabra1': 2}, {'palabra2': 2}]}
+        element = {"name":"texto",'words': [{'palabra1': 2}, {'palabra2': 2}]}
 
         self.assertFalse(self.data_base._exist(element))
 
