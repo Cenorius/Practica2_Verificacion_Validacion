@@ -1,7 +1,7 @@
 from unittest import TestCase
 import unittest
 import mongomock
-
+import mock
 from practica.data_base import data_base
 
 
@@ -20,7 +20,7 @@ class data_base_TestDB(TestCase):
     def test_insert_element_existing_in_db(self):
         element = {'texto': [{'palabra1': 1}, {'palabra2': 2}]}
 
-        self.data_base.insert(element)
+        self.data_base._exist=mock.MagicMock(return_value=True)
 
         self.assertFalse(self.data_base.insert(element))
 
