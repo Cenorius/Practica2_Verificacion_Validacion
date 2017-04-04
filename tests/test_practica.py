@@ -25,7 +25,7 @@ class data_base_TestDB(TestCase):
 
         self.assertEqual(self.data_base.insert(element),None)
 
-    def test_insert(self):
+    def test_insert_element_not_existing_in_db(self):
         element = {'texto2': [{'palabra1': 1}, {'palabra2': 2}]}
 
         self.data_base._exist=mock.MagicMock(return_value=False)
