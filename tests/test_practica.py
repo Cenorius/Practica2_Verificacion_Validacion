@@ -23,14 +23,14 @@ class data_base_TestDB(TestCase):
 
         self.data_base._exist=mock.MagicMock(return_value=True)
 
-        self.assertEqual(self.data_base.insert(element),None)
+        self.assertFalse(self.data_base.insert(element))
 
     def test_insert_element_not_existing_in_db(self):
         element = {'texto2': [{'palabra1': 1}, {'palabra2': 2}]}
 
         self.data_base._exist=mock.MagicMock(return_value=False)
 
-        self.assertEqual(type(self.data_base.insert(element)),pymongo.results.InsertOneResult)
+        self.assertTrue(self.data_base.insert(element))
 
     def test_insert_integer(self):
         element = 1

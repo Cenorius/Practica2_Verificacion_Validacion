@@ -19,7 +19,7 @@ class data_base(object):
         else:
             result=None
 
-        return result
+        return result is not None
     
     def get_words(self):
         iterator=self.db.words.find()
@@ -32,6 +32,7 @@ class data_base(object):
 
 
     def delete(self,id):
+
         self.db.words.remove({'_id': id})
     
     def update(self, dictionary,id):
