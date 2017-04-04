@@ -13,7 +13,13 @@ class data_base(object):
 
 
     def insert(self,dictionary):
-        self.db.words.insert_one(dictionary)
+
+        if(not self._exist(dictionary)):
+            result=self.db.words.insert_one(dictionary)
+        else:
+            result=None
+
+        return result
     
     def get_words(self):
         iterator=self.db.words.find()
