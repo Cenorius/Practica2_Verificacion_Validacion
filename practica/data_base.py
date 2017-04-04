@@ -13,9 +13,8 @@ class data_base(object):
 
 
     def insert(self,dictionary):
-
         if(not self._exist(dictionary)):
-            result=self.db.words.insert_one(dictionary)
+            result=self.db.words.insert_one(dictionary).insert_id
         else:
             result=None
 
