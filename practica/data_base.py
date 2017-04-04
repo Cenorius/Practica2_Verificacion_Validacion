@@ -34,7 +34,7 @@ class data_base(object):
 
     def _exist(self, element):
         result = self.db.words.find_one(element)
-        return element is not None
+        return result is not None
 
     def _alive(self):
         """Siempre tiene que estar alive por lo tanto siempre se devuelve True

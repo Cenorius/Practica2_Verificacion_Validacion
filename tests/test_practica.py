@@ -66,9 +66,9 @@ class data_base_TestDB(TestCase):
             # -test__exist------------------------------------------------------------------------------------------------
 
     def test__exist_not_existing_element_in_db(self):
-        element = {'texto3': [{'palabra1': 1}, {'palabra2': 2}]}
+        element = {'texto3': [{'palabra1': 2}, {'palabra2': 2}]}
 
-        self.assertTrue(self.data_base._exist(element))
+        self.assertFalse(self.data_base._exist(element))
 
     def test__alive(self):
         self.assertTrue(self.data_base._alive())
