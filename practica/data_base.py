@@ -34,7 +34,10 @@ class data_base(object):
         return self.db.words.delete_one({'_id': id})
     
     def update(self, dictionary,id):
-        self.db.words.update_one({"_id" : id},{'$set':dictionary},False)
+        if type(dictionary) is not dict:
+            raise TypeError
+
+        return self.db.words.update_one({"_id" : id},{'$set':dictionary},False)
 
 
     def _exist(self, element):

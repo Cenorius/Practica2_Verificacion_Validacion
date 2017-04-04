@@ -70,10 +70,54 @@ class data_base_TestDB(TestCase):
 
         self.assertEqual(result,expected)
 
+        
+
 # -test_update------------------------------------------------------------------------------------------------
-    def test_update_one(self):
-        element=self.data_base.update({'_id':1},{'$set':{'a':"2",'b':"1",'c':"3"}})
-        self.assertFalse(self.data_base._exist(element))
+    def test_update_one_existing_in_db(self):
+        element={"name":"texto",'words': [{'palabra1': 1}, {'palabra2': 2}]}
+        id=self.data_base.insert(element)
+
+        result=self.data_base.update(element,id).matched_count
+        expected=1
+
+        self.assertEquals(result,expected)
+    
+    def test_update_one_not_existing_in_db(self):
+        element={"name":"texto",'words': [{'palabra1': 1}, {'palabra2': 2}]}
+        id="id"
+
+        result=self.data_base.update(element,id).matched_count
+        expected=0
+
+        self.assertEquals(result,expected)
+
+    def test_update_one_integer(self):
+        element = 1
+        id="id"
+
+        with self.assertRaises(TypeError):
+            self.data_base.update(element,id)
+
+    def test_update_one_list(self):
+        element = []
+        id="id"
+
+        with self.assertRaises(TypeError):
+            self.data_base.update(element,id)
+
+    def test_update_one_str(self):
+        element = 'test'
+        id="id"
+
+        with self.assertRaises(TypeError):
+            self.data_base.update(element,id)
+
+    def test_update_one_unicode(self):
+        element = u'test'
+        id="id"
+
+        with self.assertRaises(TypeError):
+            self.data_base.update(element,id)
 
 # -test__exist------------------------------------------------------------------------------------------------
 
