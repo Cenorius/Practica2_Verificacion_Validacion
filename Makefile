@@ -5,5 +5,5 @@ test:
 	nosetests tests
 
 coverage:
-	coverage run practica/practica.py
-	coverage report -m
+	coverage run practica/data_base.py
+	coverage report -m --omit=ENV/*

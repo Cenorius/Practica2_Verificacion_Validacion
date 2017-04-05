@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import pymongo
-
+import pymongo # pragma: no cover
+from words_count import count
 
 #'mongodb://localhost:27017/'
 class data_base(object):
@@ -44,9 +44,28 @@ class data_base(object):
         result = self.db.words.find_one(element)
         return result is not None
 
-    def _alive(self):
-        """Siempre tiene que estar alive por lo tanto siempre se devuelve True
-        """
 
-        return True
+if __name__ == '__main__':
+    dataB=data_base()
+    tstr='bicicleta,bicicletá hola @bièn bién bien ©"'
+    tstr2='bicicleta,bicicletá hola @bièn bien ©"'
+
+    words2=count(tstr2)
+    words=count(tstr)
+    print words
+    print words2
+
+    id=dataB.insert(dict(words))
+    print id
+
+    print dataB.get_words()
+
+    dataB.update(dict(words2),id)
+
+    print dataB.get_words()
+
+    print dataB.delete(id)
+
+
+
 

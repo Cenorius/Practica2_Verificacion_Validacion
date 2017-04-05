@@ -18,14 +18,14 @@ class data_base_TestDB(TestCase):
 # -test_insert---------------------------------------------------------------------------------------------
 
     def test_insert_element_existing_in_db(self):
-        element = {"name":"texto",'words': [{'palabra1': 1}, {'palabra2': 2}]}
+        element = {"name":"texto",'words': [{'palabra1': 1,'palabra2': 2}]}
 
         self.data_base._exist=mock.MagicMock(return_value=True)
 
         self.assertIsNone(self.data_base.insert(element))
 
     def test_insert_element_not_existing_in_db(self):
-        element = {"name":"texto",'words': [{'palabra1': 1}, {'palabra2': 2}]}
+        element = {"name":"texto",'words': [{'palabra1': 1,'palabra2': 2}]}
         
         self.data_base._exist=mock.MagicMock(return_value=True)
 
@@ -63,7 +63,7 @@ class data_base_TestDB(TestCase):
         self.assertEqual(result,expected)
 
     def test_delete_one_element_existing_in_db(self):
-        id=self.data_base.insert({"name":"texto",'words': [{'palabra1': 1}, {'palabra2': 2}]})
+        id=self.data_base.insert({"name":"texto",'words': [{'palabra1': 1,'palabra2': 2}]})
         
         result=self.data_base.delete(id).deleted_count
         expected=1
@@ -74,7 +74,7 @@ class data_base_TestDB(TestCase):
 
 # -test_update_one------------------------------------------------------------------------------------------------
     def test_update_one_existing_in_db(self):
-        element={"name":"texto",'words': [{'palabra1': 1}, {'palabra2': 2}]}
+        element={"name":"texto",'words': [{'palabra1': 1,'palabra2': 2}]}
         id=self.data_base.insert(element)
 
         result=self.data_base.update(element,id).matched_count
@@ -83,7 +83,7 @@ class data_base_TestDB(TestCase):
         self.assertEquals(result,expected)
     
     def test_update_one_not_existing_in_db(self):
-        element={"name":"texto",'words': [{'palabra1': 1}, {'palabra2': 2}]}
+        element={"name":"texto",'words': [{'palabra1': 1,'palabra2': 2}]}
         id="id"
 
         result=self.data_base.update(element,id).matched_count
@@ -122,15 +122,16 @@ class data_base_TestDB(TestCase):
 # -test__exist------------------------------------------------------------------------------------------------
 
     def test_exist_not_existing_element_in_db(self):
-        element = {"name":"texto",'words': [{'palabra1': 2}, {'palabra2': 2}]}
+        element = {"name":"texto",'words': [{'palabra1': 2,'palabra2': 2}]}
 
         self.assertFalse(self.data_base._exist(element))
 
     def test_exist_existing_element_in_db(self):
-        element = {"name":"texto",'words': [{'palabra1': 2}, {'palabra2': 2}]}
+        element = {"name":"texto",'words': [{'palabra1': 2,'palabra2': 2}]}
         self.data_base.insert(element)
 
         self.assertTrue(self.data_base._exist(element))
 
-    def test_alive(self):
-        self.assertTrue(self.data_base._alive())
+
+if __name__ == '__main__':
+    unittest.main()
