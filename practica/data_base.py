@@ -48,7 +48,6 @@ class data_base(object):
 
 if __name__ == '__main__':
     dataB=data_base()
-    dataB.db= mongomock.MongoClient()["words"]
     tstr='bicicleta,bicicletá hola @bièn bién bien ©"'
     tstr2='bicicleta,bicicletá hola @bièn bien ©"'
 

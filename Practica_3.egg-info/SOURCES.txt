@@ -1,0 +1,8 @@
+setup.py
+Practica_3.egg-info/PKG-INFO
+Practica_3.egg-info/SOURCES.txt
+Practica_3.egg-info/dependency_links.txt
+Practica_3.egg-info/top_level.txt
+practica/__init__.py
+practica/data_base.py
+practica/words_count.py
