@@ -1,7 +1,7 @@
 ENV
 build
 dist
-practica_2.egg-info
+Practica_3.egg-info
 .coverage
 *.pyc
 *.xml
